@@ -1,0 +1,20 @@
+.swal2-actions {
+    margin-top: 10%;
+}
+
+.swal2-popup {
+    padding: 40px 0px 40px 0px;
+}
+
+table.dataTable td {
+    padding: 2px 5px;
+    width: 1px;
+    white-space: nowrap;
+}
+.error{
+    color: red;
+}
+
+.fa-edit {
+    color: red;
+}
