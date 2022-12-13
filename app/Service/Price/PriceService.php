@@ -7,6 +7,8 @@ use App\Service\Service;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
+
 
 class PriceService extends Service
 {
@@ -67,17 +69,15 @@ class PriceService extends Service
                 }
             })
             ->editcolumn('actions',function(Price $price) {
-                $editRoute =  route('price.edit',$price->id);
-                $deleteRoute =  route('price.destroy',$price->id);
-                return getTableHtml($price,'actions',$editRoute,$deleteRoute);
-                return getTableHtml($price,'image');
-            })->rawColumns(['visibility','availability','status','is_default','image'])->make(true);
+                return '<a  href="' . route('inventory.price.edit',$price->id) . '"><i class="fas fa-edit custom_edit" data-id=""></i></a>';
+            })->rawColumns(['visibility','availability','status','is_default','image','actions'])->make(true);
     }
 
     public function create(array $data)
     {
         try {
             /* $data['keywords'] = '"'.$data['keywords'].'"';*/
+            $data['slug'] = Str::slug($data['name'],'-');
             $data['visibility'] = (isset($data['visibility']) ?  $data['visibility'] : '')=='on' ? 'visible' : 'invisible';
             $data['status'] = (isset($data['status']) ?  $data['status'] : '')=='on' ? 'active' : 'in_active';
             $data['is_default'] = (isset($data['is_default']) ?  $data['is_default'] : '')=='on' ? 'yes' : 'no';
@@ -157,7 +157,7 @@ class PriceService extends Service
     public function update($priceId, array $data)
     {
         try {
-
+            $data['slug'] = Str::slug($data['name'],'-');
             $data['visibility'] = (isset($data['visibility']) ?  $data['visibility'] : '')=='on' ? 'visible' : 'invisible';
             $data['status'] = (isset($data['status']) ?  $data['status'] : '')=='on' ? 'active' : 'in_active';
             $data['is_default'] = (isset($data['is_default']) ?  $data['is_default'] : '')=='on' ? 'yes' : 'no';

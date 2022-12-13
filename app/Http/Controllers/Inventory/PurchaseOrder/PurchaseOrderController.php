@@ -25,7 +25,7 @@ class PurchaseOrderController extends Controller
     {
         //
         $purchaseorder = $this->purchaseorder->paginate();
-        return view ('purchase_order.index',compact('purchaseorder'));
+        return view('backend.inventory.purchase_order.index',compact('purchaseorder'));
     }
 
     public function getAllData()
@@ -42,7 +42,7 @@ class PurchaseOrderController extends Controller
     {
         //
         $product = $this->product->paginate();
-        return view('purchase_order.create',compact('product'));
+        return view('backend.inventory.purchase_order.create',compact('product'));
     }
 
     /**
@@ -59,8 +59,7 @@ class PurchaseOrderController extends Controller
                 if($request->hasFile('image')) {
                     $this->uploadFile($request, $purchaseorder);
                 }
-                Toastr()->success('Purchase Order Created Successfully','Success');
-                return redirect()->route('purchaseorder.index');
+                return redirect()->route('inventory.purchaseorder.index');
             }
 
         } catch (Exception $e) {
@@ -92,7 +91,7 @@ class PurchaseOrderController extends Controller
         $purchaseorder = $this->purchaseorder->find($id);
         $product = $this->product->paginate();
         $product_search = $this->product->find($purchaseorder->product_id);
-        return view('purchase_order.edit',compact('purchaseorder','product','product_search'));
+        return view('backend.inventory.purchase_order.edit',compact('purchaseorder','product','product_search'));
     }
 
     /**
@@ -111,8 +110,7 @@ class PurchaseOrderController extends Controller
                 $purchaseorder = $this->purchaseorder->find($id);
                 $this->uploadFile($request, $purchaseorder);
             }
-            Toastr()->success('Purchase Order Updated Successfully.','Success');
-            return redirect()->route('purchaseorder.index');
+            return redirect()->route('inventory.purchaseorder.index');
         }
     }
 

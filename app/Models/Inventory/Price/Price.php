@@ -2,7 +2,7 @@
 
 namespace App\Models\Inventory\Price;
 
-use App\Modules\Models\User;
+use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -48,7 +48,7 @@ class Price extends Model
     }
 
     public function product(){
-        return $this->belongsTo('App\Modules\Models\Product\Product', 'product_id','id');
+        return $this->belongsTo('App\Models\Inventory\Product\Product', 'product_id','id');
     }
 
 }

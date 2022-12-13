@@ -15,12 +15,11 @@ use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
-    protected $product, $customer, $sale, $category, $price,$purchase;
+    protected $product, $sale, $category, $price,$purchase;
 
-    function __construct(ProductService $product, CustomerService $customer, SaleService $sale, CategoryService $category, PriceService $price,PurchaseService $purchase)
+    function __construct(ProductService $product, SaleService $sale, CategoryService $category, PriceService $price,PurchaseService $purchase)
     {
         $this->product = $product;
-        $this->customer = $customer;
         $this->sale = $sale;
         $this->category = $category;
         $this->price = $price;
@@ -52,10 +51,9 @@ class SaleController extends Controller
     public function create()
     {
         //
-        $customer = $this->customer->paginate();
         $product = $this->product->paginate();
         $category = $this->category->paginate();
-        return view('sale.create',compact('customer','product','category'));
+        return view('sale.create',compact('product','category'));
     }
 
     /**

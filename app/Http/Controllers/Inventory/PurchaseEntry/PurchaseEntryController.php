@@ -31,7 +31,7 @@ class PurchaseEntryController extends Controller
     {
         //
         $purchase_entry = $this->purchase_entry->paginate();
-        return view('purchase_entry.index',compact('purchase_entry'));
+        return view('backend.inventory.purchase_entry.index',compact('purchase_entry'));
 
     }
 
@@ -52,7 +52,7 @@ class PurchaseEntryController extends Controller
         //
         $product = $this->product->paginate();
         $purchase_order = $this->purchase_order->getOnlyUnApproved();
-        return view('purchase_entry.create',compact('product','purchase_order'));
+        return view('backend.inventory.purchase_entry.create',compact('product','purchase_order'));
 
     }
 
@@ -62,7 +62,7 @@ class PurchaseEntryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PurchaseRequest $request)
+    public function store(Request $request)
     {
         //
             // if($product = $this->purchase->getByProductForUpdate($request->except('_token','pageSubmit'))) {
@@ -85,10 +85,9 @@ class PurchaseEntryController extends Controller
                         if($request->hasFile('image')) {
                             $this->uploadFile($request, $purchase_entry);
                         }
-                        Toastr()->success('Purchase Entry Created Successfully','Success');
                     }
                 }
-                return redirect()->route('purchase_entry.index');
+                return redirect()->route('inventory.purchaseentry.index');
             } catch (Exception $e) {
                 return false;
             }
@@ -120,7 +119,7 @@ class PurchaseEntryController extends Controller
     {
         //
         $purchase_entry = $this->purchase_entry->find($id);
-        return view('purchase_entry.edit',compact('purchase_entry'));
+        return view('backend.inventory.purchase_entry.edit',compact('purchase_entry'));
 
 
 
@@ -142,8 +141,8 @@ class PurchaseEntryController extends Controller
                 $purchase = $this->purchase->find($id);
                 $this->uploadFile($request, $purchase);
             }
-            Toastr()->success('Purchase Entry Updated Successfully','Success');
-            return redirect()->route('purchase_entry.index');
+
+            return redirect()->route('inventory.purchaseentry.index');
         }
     }
 

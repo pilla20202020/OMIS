@@ -2,7 +2,7 @@
 
 namespace App\Service\PurchaseEntry;
 
-use App\Models\PurchaseEntry\PurchaseEntry;
+use App\Models\Inventory\PurchaseEntry\PurchaseEntry;
 use App\Models\PurchaseOrder\PurchaseOrder;
 use App\Service\PurchaseOrder\PurchaseOrderService;
 use App\Service\Service;
@@ -31,10 +31,8 @@ class PurchaseEntryService extends Service
         return DataTables::of($query)
             ->addIndexColumn()
             ->editcolumn('actions',function($query) {
-                $editRoute =  route('purchase_entry.edit',$query->id);
-                $deleteRoute =  route('purchase_entry.destroy',$query->id);
-                return getTableHtml($query,'actions',$editRoute,$deleteRoute);
-            })->rawColumns(['actions'])->make(true);
+                return '<a  href="' .route('inventory.purchaseentry.edit',$query->id). '"><i class="fas fa-edit custom_edit" data-id=""></i></a>';
+            })->rawColumns(['is_approved','actions'])->make(true);
     }
 
     public function create(array $data)

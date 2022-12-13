@@ -2,7 +2,7 @@
 
 namespace App\Models\Inventory\Category;
 
-use App\Modules\Models\User;
+use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

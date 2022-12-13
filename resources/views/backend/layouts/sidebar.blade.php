@@ -469,6 +469,38 @@
                       </li>
 
 
+                      <li class="nav-item">
+                        <a href="{{ route('inventory.price.index') }}"
+                            class="nav-link @if (Request::is('inventory/price/*')) active @endif">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                              Price
+                            </p>
+                        </a>
+                      </li>
+
+                      <li class="nav-item">
+                        <a href="{{ route('inventory.purchaseorder.index') }}"
+                            class="nav-link @if (Request::is('inventory/purchaseorder/*')) active @endif">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                              Purchase Order
+                            </p>
+                        </a>
+                      </li>
+
+
+                      <li class="nav-item">
+                        <a href="{{ route('inventory.purchaseentry.index') }}"
+                            class="nav-link @if (Request::is('inventory/purchaseentry/*')) active @endif">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                              Purchase Entry
+                            </p>
+                        </a>
+                      </li>
+
+
                       {{-- <li class="nav-item">
                           <a href="{{ route('hris.onboarding-employee.index') }}"
                               class="nav-link @if (Request::is('hris/onboarding-employee/*')) active @endif">

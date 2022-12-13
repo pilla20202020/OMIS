@@ -18,7 +18,10 @@ use App\Http\Controllers\HRIS\ShiftController;
 use App\Http\Controllers\HRIS\UserController as HRISUserController;
 use App\Http\Controllers\Inventory\Brand\BrandController;
 use App\Http\Controllers\Inventory\Category\CategoryController;
+use App\Http\Controllers\Inventory\Price\PriceController;
 use App\Http\Controllers\Inventory\Product\ProductController;
+use App\Http\Controllers\Inventory\PurchaseEntry\PurchaseEntryController;
+use App\Http\Controllers\Inventory\purchaseorder\purchaseorderController;
 use App\Http\Controllers\Inventory\Supplier\SupplierController;
 use App\Http\Controllers\Inventory\Unit\UnitController;
 use App\Http\Controllers\LMS\Campaign\CampaignController;
@@ -391,4 +394,49 @@ Route::middleware(['auth'])->prefix('inventory')->group(function () {
         Route::put('/product/{product}', [ProductController::class, 'update'])->name('inventory.product.update');
         Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('inventory.product.edit');
         Route::post('/product/delete', [ProductController::class, 'delete'])->name('inventory.product.delete'); // Delete ajax
+
+        /**
+         * --------------------------------------
+         *      Price
+         * --------------------------------------
+         */
+        Route::get('/price/index', [PriceController::class, 'index'])->name('inventory.price.index'); //View
+        Route::get('price-data', [PriceController::class, 'getAllData'])->name('inventory.price.data');
+        Route::get('/price/create', [PriceController::class, 'create'])->name('inventory.price.create'); //View
+        Route::post('/price/store', [PriceController::class, 'store'])->name('inventory.price.store'); // Create
+        Route::put('/price/{price}', [PriceController::class, 'update'])->name('inventory.price.update');
+        Route::get('/price/{price}/edit', [PriceController::class, 'edit'])->name('inventory.price.edit');
+        Route::post('/price/delete', [PriceController::class, 'delete'])->name('inventory.price.delete'); // Delete ajax
+
+        /**
+         * --------------------------------------
+         *      Puchase Order
+         * --------------------------------------
+         */
+        Route::get('/purchaseorder/index', [PurchaseOrderController::class, 'index'])->name('inventory.purchaseorder.index'); //View
+        Route::get('purchaseorder-data', [PurchaseOrderController::class, 'getAllData'])->name('inventory.purchaseorder.data');
+        Route::get('/purchaseorder/create', [PurchaseOrderController::class, 'create'])->name('inventory.purchaseorder.create'); //View
+        Route::post('/purchaseorder/store', [PurchaseOrderController::class, 'store'])->name('inventory.purchaseorder.store'); // Create
+        Route::put('/purchaseorder/{purchaseorder}', [PurchaseOrderController::class, 'update'])->name('inventory.purchaseorder.update');
+        Route::get('/purchaseorder/{purchaseorder}/edit', [PurchaseOrderController::class, 'edit'])->name('inventory.purchaseorder.edit');
+        Route::post('/purchaseorder/delete', [PurchaseOrderController::class, 'delete'])->name('inventory.purchaseorder.delete'); // Delete ajax
+        Route::post('quntitycheckajax', [PurchaseOrderController::class, 'quantityCheckAjax'])->name('inventory.purchaseorder.quntitycheckajax');
+
+
+        /**
+         * --------------------------------------
+         *      Puchase Entry
+         * --------------------------------------
+         */
+        Route::get('/purchaseentry/index', [PurchaseEntryController::class, 'index'])->name('inventory.purchaseentry.index'); //View
+        Route::get('purchaseentry-data', [PurchaseEntryController::class, 'getAllData'])->name('inventory.purchaseentry.data');
+        Route::get('/purchaseentry/create', [PurchaseEntryController::class, 'create'])->name('inventory.purchaseentry.create'); //View
+        Route::post('/purchaseentry/store', [PurchaseEntryController::class, 'store'])->name('inventory.purchaseentry.store'); // Create
+        Route::put('/purchaseentry/{purchaseentry}', [PurchaseEntryController::class, 'update'])->name('inventory.purchaseentry.update');
+        Route::get('/purchaseentry/{purchaseentry}/edit', [PurchaseEntryController::class, 'edit'])->name('inventory.purchaseentry.edit');
+        Route::post('/purchaseentry/delete', [PurchaseEntryController::class, 'delete'])->name('inventory.purchaseentry.delete'); // Delete ajax
+        Route::get('getproductorder', [PurchaseEntryController::class, 'getProductOrder'])->name('inventory.purchaseentry.getproductorder');
+
+
     });
+

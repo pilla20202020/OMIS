@@ -27,7 +27,7 @@ class PriceController extends Controller
     {
         //
         $prices = $this->price->paginate();
-        return view ('price.index',compact('prices'));
+        return view('backend.inventory.price.index',compact('prices'));
     }
 
     public function getAllData()
@@ -45,7 +45,7 @@ class PriceController extends Controller
     {
         //
         $product  = $this->product->paginate();
-        return view('price.create',compact('product'));
+        return view('backend.inventory.price.create',compact('product'));
 
     }
 
@@ -59,7 +59,7 @@ class PriceController extends Controller
     {
         //
         if($price = $this->price->create($request->all())) {
-            return redirect()->route('price.index');
+            return redirect()->route('inventory.price.index');
         }
 
     }
@@ -84,6 +84,9 @@ class PriceController extends Controller
     public function edit($id)
     {
         //
+        $price = $this->price->find($id);
+        $product  = $this->product->paginate();
+        return view('backend.inventory.price.edit',compact('price','product'));
     }
 
     /**
@@ -96,6 +99,14 @@ class PriceController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if($this->price->update($id,$request->all()))
+        {
+            if ($request->hasFile('image')) {
+                $price = $this->price->find($id);
+                $this->uploadFile($request, $price);
+            }
+            return redirect()->route('inventory.price.index');
+        }
     }
 
     /**

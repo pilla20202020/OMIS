@@ -2,12 +2,14 @@
 
 namespace App\Service\PurchaseOrder;
 
-use App\Models\PurchaseOrder\PurchaseOrder;
+use App\Models\Inventory\PurchaseOrder\PurchaseOrder;
 use App\Service\Service;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
+
 
 class PurchaseOrderService extends Service
 {
@@ -36,9 +38,7 @@ class PurchaseOrderService extends Service
                 }
             })
             ->editcolumn('actions',function($query) {
-                $editRoute =  route('purchaseorder.edit',$query->id);
-                $deleteRoute =  route('purchaseorder.destroy',$query->id);
-                return getTableHtml($query,'actions',$editRoute,$deleteRoute);
+                return '<a  href="' .route('inventory.purchaseorder.edit',$query->id). '"><i class="fas fa-edit custom_edit" data-id=""></i></a>';
             })->rawColumns(['is_approved','actions'])->make(true);
     }
 
@@ -116,7 +116,6 @@ class PurchaseOrderService extends Service
     public function update($purchaseorderId, array $data)
     {
         try {
-
             $data['visibility'] = (isset($data['visibility']) ?  $data['visibility'] : '')=='on' ? 'visible' : 'invisible';
             $data['status'] = (isset($data['status']) ?  $data['status'] : '')=='on' ? 'active' : 'in_active';
             $data['availability'] = (isset($data['availability']) ?  $data['availability'] : '')=='on' ? 'available' : 'not_available';
