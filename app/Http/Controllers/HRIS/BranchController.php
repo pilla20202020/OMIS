@@ -161,7 +161,7 @@ class BranchController extends Controller
             ->addIndexColumn()
 
             ->editColumn('action', function ($model) {
-                return auth()->user()->company_id ? '<i class="fas fa-edit custom_edit" data-id="' . $model->branch_id . '"></i> <a href="' . route('hris.branch.login-as-branch', [$model->branch_id]) . '" class="btn btn-block btn-success btn-sm">Login As Branch</a>' : "";
+                return auth()->user()->company_id  && permission('hris.branch.edit') ? '<i class="fas fa-edit custom_edit" data-id="' . $model->branch_id . '"></i> <a href="' . route('hris.branch.login-as-branch', [$model->branch_id]) . '" class="btn btn-block btn-success btn-sm">Login As Branch</a>' : "";
             })
             ->toJson();
 

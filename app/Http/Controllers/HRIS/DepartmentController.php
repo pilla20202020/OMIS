@@ -164,7 +164,7 @@ class DepartmentController extends Controller
             ->addIndexColumn()
 
             ->editColumn('action', function ($model) {
-                return auth()->user()->branch_id ? '<i class="fas fa-edit custom_edit" data-id="' . $model->dept_id . '"></i>' : "";
+                return auth()->user()->branch_id && permission('hris.department.edit')? '<i class="fas fa-edit custom_edit" data-id="' . $model->dept_id . '"></i>' : "";
             })
             ->toJson();
 

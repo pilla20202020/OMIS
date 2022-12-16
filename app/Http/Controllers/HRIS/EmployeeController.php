@@ -170,7 +170,7 @@ class EmployeeController extends Controller
             ->addIndexColumn()
 
             ->editColumn('action', function ($model) {
-                return  auth()->user()->branch_id ? '<a href="' . route('hris.employee.create') . "?emp_id=" . $model->emp_id . '" <i class="fas fa-edit custom_edit" data-id="' . $model->emp_id . '"></i>' : "";
+                return  auth()->user()->branch_id && permission('hris.employee.edit') ? '<a href="' . route('hris.employee.create') . "?emp_id=" . $model->emp_id . '" <i class="fas fa-edit custom_edit" data-id="' . $model->emp_id . '"></i>' : "";
                 // return '<i class="fas fa-edit custom_edit" data-id="' . $model->emp_id . '"></i>';
             })
             ->toJson();

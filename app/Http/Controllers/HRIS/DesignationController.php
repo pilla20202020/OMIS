@@ -166,7 +166,7 @@ class DesignationController extends Controller
             ->addIndexColumn()
 
             ->editColumn('action', function ($model) {
-                return auth()->user()->company_id ? '<i class="fas fa-edit custom_edit" data-id="' . $model->designation_id . '"></i>' : "";
+                return auth()->user()->company_id && permission('hris.designations.edit')? '<i class="fas fa-edit custom_edit" data-id="' . $model->designation_id . '"></i>' : "";
             })
             ->toJson();
 
