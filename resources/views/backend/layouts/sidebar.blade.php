@@ -514,6 +514,91 @@
                   </ul>
                 </li>
 
+                <li class="nav-item @if (Request::is('inventory/*')) menu-is-opening menu-open @endif">
+                    <a href="#" class="nav-link @if (Request::is('inventory/*')) active @endif">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Leave Management
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('leave.getcalendar') }}"
+                                class="nav-link @if (Request::is('leave/calendar/*')) active @endif">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Calendar
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('holiday.index') }}"
+                                class="nav-link @if (Request::is('leave/holiday/*')) active @endif">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Holiday
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('leavetypes.index') }}"
+                                class="nav-link @if (Request::is('leave/leavetypes/*')) active @endif">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Leave Types
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('leaverequest.index') }}"
+                                class="nav-link @if (Request::is('leave/leaverequest/index')) active @endif">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    All Leave Request
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('leaverequest.approve') }}"
+                                class="nav-link @if (Request::is('leave/leaverequest/approve')) active @endif">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    To Be Approved Request
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('leaverequest.report')}}"
+                                class="nav-link @if (Request::is('leave/leaverequest/report')) active @endif">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Leave Balance Report
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('leaverequest.reportbymonth')}}"
+                                class="nav-link @if (Request::is('leave/leaverequest/reportbymonth')) active @endif">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Monthly Report
+                                </p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+
+
+                </li>
+
                 {{-- <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>

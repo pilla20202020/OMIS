@@ -2,7 +2,7 @@
 
 namespace App\Models\Inventory\SaleDetail;
 
-use App\Modules\Models\User;
+use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -48,11 +48,11 @@ class SaleDetail extends Model
     }
 
     public function sale(){
-        return $this->belongsTo('App\Modules\Models\Sale\Sale', 'sale_id','id');
+        return $this->belongsTo('App\Models\Sale\Sale', 'sale_id','id');
     }
 
     public function product(){
-        return $this->belongsTo('App\Modules\Models\Product\Product', 'product_id','id');
+        return $this->belongsTo('App\Models\Product\Product', 'product_id','id');
     }
 
 }

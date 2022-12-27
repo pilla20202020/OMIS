@@ -57,10 +57,10 @@ class Sale extends Model
     }
 
     public function customer(){
-        return $this->belongsTo('App\Modules\Models\Customer\Customer', 'customer_id','id');
+        return $this->belongsTo('App\Models\Customer\Customer', 'customer_id','id');
     }
 
     public function product(){
-        return $this->belongsTo('App\Modules\Models\Product\Product', 'product_id','id');
+        return $this->belongsTo('App\Models\Product\Product', 'product_id','id');
     }
 }

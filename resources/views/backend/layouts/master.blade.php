@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('css/backend/config/common_config.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+
     @yield('css')
 </head>
 
@@ -49,7 +52,7 @@
     <!-- AdminLTE for demo purposes -->
     {{-- <script src="../../dist/js/demo.js"></script> --}}
     <!-- Page specific script -->
-    
+
 
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
@@ -61,6 +64,9 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="{{ asset('js/toastr/toastr.js') }}"></script>
+
     <script>
         $(function() {
           setTimeout(() => {
@@ -68,6 +74,7 @@
           }, 3000);
         });
     </script>
+    {!! Toastr::message() !!}
     @yield('js')
 </body>
 

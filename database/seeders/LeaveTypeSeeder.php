@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Payroll\LeaveType;
 use App\Models\Payroll\LeaveTypes;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class LeaveTypeSeeder extends Seeder
 {
@@ -15,40 +16,18 @@ class LeaveTypeSeeder extends Seeder
      */
     public function run()
     {
-        $leaveTypes = [
+        $absenttype=[
             [
-                'leave_type' => 'Sick',
-                'company_id' => 1,
-                'days' => 10,
-                'description' => '',
-                'created_by' => 1,
-                'updated_by' => 1
+                'name'=>'Annual Leave',
+                'slug'=>'annual-leave',
+                'total_days'=>'20',
             ],
             [
-                'leave_type' => 'Paid',
-                'company_id' => 1,
-                'days' => 20,
-                'description' => '',
-                'created_by' => 1,
-                'updated_by' => 1
-            ],
-            [
-                'leave_type' => 'Unpaid',
-                'company_id' => 1,
-                'days' => 12,
-                'description' => '',
-                'created_by' => 1,
-                'updated_by' => 1
-            ],
-            
+                'name'=>'Sick Leave',
+                'slug'=>'sick-leave',
+                'total_days'=>'10',
+            ]
         ];
-
-        
-            foreach ($leaveTypes as $leaveType) {
-                $existleaveType = LeaveType::where('leave_type', $leaveType['leave_type'])
-                    ->where('company_id', 1)->first();
-                if (!$existleaveType)
-                LeaveType::create($leaveType);
-            }
+        DB::table('leave_types')->insert($absenttype);
     }
 }

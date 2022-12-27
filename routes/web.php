@@ -21,9 +21,11 @@ use App\Http\Controllers\Inventory\Category\CategoryController;
 use App\Http\Controllers\Inventory\Price\PriceController;
 use App\Http\Controllers\Inventory\Product\ProductController;
 use App\Http\Controllers\Inventory\PurchaseEntry\PurchaseEntryController;
-use App\Http\Controllers\Inventory\purchaseorder\purchaseorderController;
+use App\Http\Controllers\Inventory\Purchaseorder\purchaseorderController;
 use App\Http\Controllers\Inventory\Supplier\SupplierController;
 use App\Http\Controllers\Inventory\Unit\UnitController;
+use App\Http\Controllers\Leave\Dashboard\DashboardController;
+
 use App\Http\Controllers\LMS\Campaign\CampaignController;
 use App\Http\Controllers\LMS\Registration\RegistrationController;
 use App\Http\Controllers\Payroll\EmployeeAttendanceController;
@@ -438,5 +440,52 @@ Route::middleware(['auth'])->prefix('inventory')->group(function () {
         Route::get('getproductorder', [PurchaseEntryController::class, 'getProductOrder'])->name('inventory.purchaseentry.getproductorder');
 
 
+    });
+
+    Route::middleware(['auth'])->prefix('leave')->group(function () {
+        /**
+         * --------------------------------------
+         *      Leave Request
+         * --------------------------------------
+         */
+        Route::get('/calendar',[DashboardController::class, 'calendar'])->name('leave.getcalendar');
+        Route::get('/full-calendar', [DashboardController::class, 'getEventLeaveRequest'])->name('leave.calendar');
+
+        Route::get('leavetypes-data', 'App\Http\Controllers\Leave\LeaveTypes\LeaveTypesController@getAllData')->name('leavetypes.data');
+        Route::resource('leavetypes', 'App\Http\Controllers\Leave\LeaveTypes\LeaveTypesController');
+        Route::get('leavetypes/{id}/destroy', 'App\Http\Controllers\Leave\LeaveTypes\LeaveTypesController@destroy')->name('leave.leavetypes.destroy');
+
+        Route::get('holiday-data', 'App\Http\Controllers\Leave\Holiday\HolidayController@getAllData')->name('leave.holiday.data');
+        Route::resource('holiday', 'App\Http\Controllers\Leave\Holiday\HolidayController');
+        Route::get('holiday/{id}/destroy', 'App\Http\Controllers\Leave\Holiday\HolidayController@destroy')->name('leave.holiday.destroy');
+
+        Route::group(['as' => 'leaverequest.', 'prefix' => 'leaverequest','namespace' => 'App\Http\Controllers\Leave'], function () {
+            Route::get('', 'LeaveRequest\LeaveRequestController@index')->name('index');
+            Route::get('leaverequest-data', 'LeaveRequest\LeaveRequestController@getAllData')->name('data');
+            Route::get('userleaverequest', 'LeaveRequest\LeaveRequestController@userleaverequest')->name('userleaverequest');
+            Route::get('userleaverequest-data', 'LeaveRequest\LeaveRequestController@getAllUserData')->name('userdata');
+            Route::get('{id}/show', 'LeaveRequest\LeaveRequestController@show')->name('show');
+            Route::get('{id}/print', 'LeaveRequest\LeaveRequestController@print')->name('print');
+            Route::get('create', 'LeaveRequest\LeaveRequestController@create')->name('create');
+            Route::post('', 'LeaveRequest\LeaveRequestController@store')->name('store');
+            Route::get('{leaverequest}/edit', 'LeaveRequest\LeaveRequestController@edit');
+            Route::put('{leaverequest}', 'LeaveRequest\LeaveRequestController@update');
+            Route::get('leaverequest/{id}/destroy', 'LeaveRequest\LeaveRequestController@destroy')->name('destroy');
+            Route::get('gettotaldays', 'LeaveRequest\LeaveRequestController@getTotalDays')->name('gettotaldays');
+            Route::get('report', 'LeaveRequest\LeaveRequestController@report')->name('report');
+            Route::get('getreport', 'LeaveRequest\LeaveRequestController@getReport')->name('getreport');
+            Route::get('reportbymonth', 'LeaveRequest\LeaveRequestController@reportByMonth')->name('reportbymonth');
+            Route::get('getreportbymonth/{month}/{year}', 'LeaveRequest\LeaveRequestController@getReportByMonth')->name('getreportbymonth');
+            Route::get('particularmonth', 'LeaveRequest\LeaveRequestController@particularMonth')->name('particularmonth');
+            Route::get('pending', 'LeaveRequest\LeaveRequestController@approveLeaveRequest')->name('approve');
+            Route::get('requesttobeapproved', 'LeaveRequest\LeaveRequestController@getAllLeaveRequest')->name('requesttobeapproved');
+            Route::get('tobeapprove', 'LeaveRequest\LeaveRequestController@toApprove')->name('tobeapprove');
+            Route::get('tobereject', 'LeaveRequest\LeaveRequestController@toReject')->name('tobereject');
+            Route::get('getuserdetail', 'LeaveRequest\LeaveRequestController@getUserDetail')->name('getuserdetail');
+            Route::get('leaverequestforlinemanager', 'LeaveRequest\LeaveRequestController@getLeaveRequestForLineManager')->name('linemanager');
+            Route::get('leaverequestforlinemanagerdata', 'LeaveRequest\LeaveRequestController@getLeaveRequestForLineManagerData')->name('linemanager.data');
+            Route::get('pending-requests', 'LeaveRequest\LeaveRequestController@getPendingLeaveRequestForLineManager')->name('linemanager.pending');
+            Route::get('linemanager-pending-requests', 'LeaveRequest\LeaveRequestController@getPendingLeaveRequestForLineManagerData')->name('linemanager.pendingdata');
+        });
     });
 

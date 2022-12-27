@@ -1,4 +1,4 @@
-@section('page-specific-styles')
+@section('css')
     <link href="{{ asset('css/dropify.min.css') }}" rel="stylesheet">
 @endsection
 @csrf
