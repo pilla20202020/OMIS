@@ -32,7 +32,7 @@ function permission($permission)
         $role = RoleUser::where('user_id', $user_id)->where('company_id', $company_id)->first();
         $rolePermissions = [];
         if ($role) {
-            $roles = Role::findOrFail($role->id);
+            $roles = Role::findOrFail($role->role_id);
             $rolePermissions = json_decode($roles->permission, true);
         }
         $userPermission = [];

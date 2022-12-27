@@ -211,69 +211,83 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('hris.branch.index') }}"
-                                class="nav-link @if (Request::is('hris/branch/*')) active @endif">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Branch
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('hris.department.index') }}"
-                                class="nav-link @if (Request::is('hris/department/*')) active @endif">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Department
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('hris.designation.index') }}"
-                                class="nav-link @if (Request::is('hris/designation/*')) active @endif">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Designation
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('hris.shift.index') }}"
-                                class="nav-link @if (Request::is('hris/shift/*')) active @endif">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Shift
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('hris.role.index') }}"
-                                class="nav-link @if (Request::is('hris/role/*')) active @endif">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Role
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('hris.user.index') }}"
-                                class="nav-link @if (Request::is('hris/user/*')) active @endif">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    User
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('hris.employee.index') }}"
-                                class="nav-link @if (Request::is('hris/employee/*')) active @endif">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Onboarding Employee
-                                </p>
-                            </a>
-                        </li>
+                        @if(in_array('hris.branch.view',$permissions))
+                          <li class="nav-item">
+                              <a href="{{ route('hris.branch.index') }}"
+                                  class="nav-link @if (Request::is('hris/branch/*')) active @endif">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p>
+                                      Branch
+                                  </p>
+                              </a>
+                          </li>
+                        @endif
+                        @if(in_array('hris.department.view',$permissions))
+                          <li class="nav-item">
+                              <a href="{{ route('hris.department.index') }}"
+                                  class="nav-link @if (Request::is('hris/department/*')) active @endif">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p>
+                                      Department
+                                  </p>
+                              </a>
+                          </li>
+                        @endif
+                        @if(in_array('hris.department.view',$permissions))
+                          <li class="nav-item">
+                              <a href="{{ route('hris.designation.index') }}"
+                                  class="nav-link @if (Request::is('hris/designation/*')) active @endif">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p>
+                                      Designation
+                                  </p>
+                              </a>
+                          </li>
+                        @endif
+                        @if(in_array('hris.shift.view',$permissions))
+                          <li class="nav-item">
+                              <a href="{{ route('hris.shift.index') }}"
+                                  class="nav-link @if (Request::is('hris/shift/*')) active @endif">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p>
+                                      Shift
+                                  </p>
+                              </a>
+                          </li>
+                        @endif
+                        @if(in_array('hris.role.view',$permissions))
+                          <li class="nav-item">
+                              <a href="{{ route('hris.role.index') }}"
+                                  class="nav-link @if (Request::is('hris/role/*')) active @endif">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p>
+                                      Role
+                                  </p>
+                              </a>
+                          </li>
+                        @endif
+                        @if(in_array('hris.user.view',$permissions))
+                          <li class="nav-item">
+                              <a href="{{ route('hris.user.index') }}"
+                                  class="nav-link @if (Request::is('hris/user/*')) active @endif">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p>
+                                      User
+                                  </p>
+                              </a>
+                          </li>
+                        @endif
+                        @if(in_array('hris.employee.view',$permissions))
+                          <li class="nav-item">
+                              <a href="{{ route('hris.employee.index') }}"
+                                  class="nav-link @if (Request::is('hris/employee/*')) active @endif">
+                                  <i class="nav-icon fas fa-th"></i>
+                                  <p>
+                                      Onboarding Employee
+                                  </p>
+                              </a>
+                          </li>
+                        @endif
 
                         {{-- <li class="nav-item">
                             <a href="{{ route('hris.onboarding-employee.index') }}"
@@ -297,6 +311,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                      @if(in_array('hris.leave-type.view',$permissions))
                         <li class="nav-item">
                             <a href="{{ route('payroll.leave-type.index') }}"
                                 class="nav-link @if (Request::is('payroll/leave-type/index*')) active @endif">
@@ -306,6 +321,7 @@
                                 </p>
                             </a>
                         </li>
+                      @endif
                         <li class="nav-item">
                             <a href="{{ route('payroll.attendance.index') }}?dept=All&shift=All&date={{ date('Y-m-d') }}"
                                 class="nav-link @if (Request::is('payroll/attendance/index*')) active @endif">

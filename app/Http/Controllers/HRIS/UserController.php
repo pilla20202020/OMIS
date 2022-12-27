@@ -135,7 +135,7 @@ class UserController extends Controller
         return DataTables::of(User::getAllUsers())
             ->addIndexColumn()
             ->addColumn('action', function ($model) {
-                $action = auth()->user()->company_id ? '<i class="fas fa-edit custom_edit" data-id="' . $model->id . '">' : "";
+                $action = auth()->user()->company_id && permission('hris.user.edit') ? '<i class="fas fa-edit custom_edit" data-id="' . $model->id . '">' : "";
                 $action .= permission('hris.user.permission') ? '</i> <a href="' . route('hris.user.permission', $model->id) . '">Special Permission</a>' : "";
                 return $action;
             })
